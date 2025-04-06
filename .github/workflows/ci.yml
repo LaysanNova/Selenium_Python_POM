@@ -51,7 +51,7 @@ jobs:
 
     - name: Set up environment variables
       run: |
-        echo "SITE_URL=${{ secrets.SITE_URL }}" >> $GITHUB_ENV
+        echo "BASE_URL=${{ secrets.BASE_URL }}" >> $GITHUB_ENV
 
     - name: Run pytest
       run: |

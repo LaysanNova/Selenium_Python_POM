@@ -1,3 +1,5 @@
+import os
+
 import pytest
 from selenium import webdriver
 from utils.env_loader import load_env
@@ -15,6 +17,13 @@ def pytest_addoption(parser):
 def load_environment(request):
     env_name = request.config.getoption("--env")
     load_env(env_name)
+
+@pytest.fixture(scope="session")
+def base_url():
+    base_url = os.getenv("BASE_URL")
+    if not base_url:
+        raise ValueError("BASE_URL is not set")
+    return base_url
 
 @pytest.fixture
 def browser(request):

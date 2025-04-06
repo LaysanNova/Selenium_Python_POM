@@ -1,4 +1,5 @@
 import os
+import tempfile
 
 import pytest
 from selenium import webdriver
@@ -28,12 +29,22 @@ def base_url():
 @pytest.fixture
 def browser(request):
     browser_name = request.config.getoption("browser_name")
+
+    chrome_options = Options()
+    chrome_options.add_argument("--log-level=3")
+
+    chrome_options.add_argument("--no-sandbox")
+
+    user_data_dir = tempfile.mkdtemp()
+    chrome_options.add_argument(f"--user-data-dir={user_data_dir}")
+
     if browser_name == "firefox":
         driver = webdriver.Firefox()
     else:
-        chrome_options = Options()
-        chrome_options.add_argument("--log-level=3")
         driver = webdriver.Chrome(options=chrome_options)
 
     yield driver
     driver.quit()
+
+    if os.path.exists(user_data_dir):
+        os.rmdir(user_data_dir)

@@ -31,7 +31,7 @@ jobs:
         # You can set other environment variables or load them from GitHub secrets as needed
 
       - name: Run tests with environment (dev/staging/prod)
-        run: pytest -n2
+        run: pytest
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
 

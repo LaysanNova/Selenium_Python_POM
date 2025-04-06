@@ -1,28 +1,28 @@
-name: Run UI Tests
+name: Run Selenium Tests
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+on: [push]
 
 jobs:
-  ui-test:
+  selenium-tests:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v4
+    - name: Check out repository
+      uses: actions/checkout@v2
 
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v4
       with:
-        python-version: '3.11'
+        python-version: '3.12'
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+
+    - name: Set up environment variables
+      run: |
+        echo "BASE_URL=${{ secrets.BASE_URL }}" >> $GITHUB_ENV
 
     - name: Install Chromium for Selenium
       run: |
@@ -32,6 +32,6 @@ jobs:
           sudo ln -s /snap/bin/chromium /usr/bin/google-chrome
         fi
 
-    - name: Run UI tests
+    - name: Run pytest
       run: |
-        pytest -v
+        pytest -v --env=dev

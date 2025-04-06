@@ -31,4 +31,7 @@ jobs:
 
       - name: Run tests
         run: pytest
+        env:
+          ACCESS_OPTIONS:
+            baseURL=${{ secrets.BASE_URL }};
 

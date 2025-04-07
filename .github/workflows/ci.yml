@@ -56,4 +56,4 @@ jobs:
     - name: Run pytest
       run: |
         echo "Base URL: $BASE_URL"
-        pytest -v --env=dev
+        pytest

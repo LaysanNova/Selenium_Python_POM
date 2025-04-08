@@ -37,13 +37,16 @@ def home_page(browser, base_url):
 @pytest.fixture
 def browser(request):
     browser_name = request.config.getoption("browser_name")
+
     if browser_name == "firefox":
         driver = webdriver.Firefox()
     else:
         chrome_options = Options()
         chrome_options.add_argument("--log-level=3")
-        chrome_options.add_argument("--headless")
         chrome_options.add_argument("--disable-gpu")
+        if os.getenv("HEADLESS") == "true":
+            chrome_options.add_argument("--headless")
+
         driver = webdriver.Chrome(options=chrome_options)
 
     yield driver

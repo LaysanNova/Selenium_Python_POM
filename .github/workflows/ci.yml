@@ -52,6 +52,7 @@ jobs:
     - name: Set up environment variables
       run: |
         echo "BASE_URL=${{ secrets.BASE_URL }}" >> $GITHUB_ENV
+        echo "HEADLESS=true" >> $GITHUB_ENV
 
     - name: Run pytest
       run: |

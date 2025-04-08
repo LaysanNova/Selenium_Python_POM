@@ -55,4 +55,5 @@ jobs:
 
     - name: Run pytest
       run: |
+        echo "Base URL: $BASE_URL"
         pytest

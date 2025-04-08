@@ -6,13 +6,16 @@ class BasePage:
         self.driver = driver
         self.timeout = timeout
 
+    def open(self, url):
+        self.driver.get(url)
+
     def find(self, locator):
         return WebDriverWait(self.driver, self.timeout).until(
             EC.presence_of_element_located(locator)
         )
 
     def click(self, locator):
-        self.find(locator).click()
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator)).click()
 
     def get_text(self, locator):
         return self.find(locator).text

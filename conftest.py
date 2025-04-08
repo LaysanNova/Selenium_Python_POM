@@ -2,6 +2,8 @@ import os
 
 import pytest
 from selenium import webdriver
+
+from pages.home_page import HomePage
 from utils.env_loader import load_env
 from selenium.webdriver.chrome.options import Options
 
@@ -27,6 +29,12 @@ def base_url():
     return base_url
 
 @pytest.fixture
+def home_page(browser, base_url):
+    page = HomePage(browser)
+    page.open(base_url)  # теперь метод open из BasePage
+    return page
+
+@pytest.fixture
 def browser(request):
     browser_name = request.config.getoption("browser_name")
     if browser_name == "firefox":
@@ -34,7 +42,7 @@ def browser(request):
     else:
         chrome_options = Options()
         chrome_options.add_argument("--log-level=3")
-        chrome_options.add_argument("--headless")
+        # chrome_options.add_argument("--headless")
         chrome_options.add_argument("--disable-gpu")
         driver = webdriver.Chrome(options=chrome_options)
 

@@ -1,51 +1,29 @@
 import os
 import time
 
-from pages.home_page import HomePage
-from pages.dynamic_id_page import DynamicIdPage
-from pages.class_attribute_page import ClassAttributePage
-from pages.hidden_layers_page import HiddenLayersPage
-from pages.load_delay_page import LoadDelayPage
-
-def test_navigate_to_dynamic_id(browser, base_url):
-    home = HomePage(browser)
-    dynamic = DynamicIdPage(browser)
-
-    home.open(base_url)
-    home.go_to_dynamic_id()
+def test_navigate_to_dynamic_id(home_page):
+    dynamic = home_page.go_to_dynamic_id()
 
     assert dynamic.is_heading_visible()
     assert dynamic.get_heading_text() == "Dynamic ID"
 
-def test_navigate_to_class_attribute(browser, base_url):
-    home = HomePage(browser)
-    page = ClassAttributePage(browser)
+def test_navigate_to_class_attribute(home_page):
+    classAttributePage = home_page.go_to_class_attribute()
 
-    home.open(base_url)
-    home.go_to_class_attribute()
+    assert classAttributePage.is_heading_visible()
+    assert classAttributePage.get_heading_text() == "Class Attribute"
 
-    assert page.is_heading_visible()
-    assert page.get_heading_text() == "Class Attribute"
+def test_navigate_to_hidden_layers(home_page):
+    hidden_layersPage = home_page.go_to_hidden_layers()
 
-def test_navigate_to_hidden_layers(browser, base_url):
-    home = HomePage(browser)
-    page = HiddenLayersPage(browser)
+    assert hidden_layersPage.is_heading_visible()
+    assert hidden_layersPage.get_heading_text() == "Hidden Layers"
 
-    home.open(base_url)
-    home.go_to_hidden_layers()
+def test_navigate_to_load_delay(home_page):
+    load_delayPage = home_page.go_to_load_delay()
 
-    assert page.is_heading_visible()
-    assert page.get_heading_text() == "Hidden Layers"
-
-def test_navigate_to_load_delay(browser, base_url):
-    home = HomePage(browser)
-    page = LoadDelayPage(browser)
-
-    home.open(base_url)
-    home.go_to_load_delay()
-
-    assert page.is_heading_visible()
-    assert page.get_heading_text() == "Load Delays"
+    assert load_delayPage.is_heading_visible()
+    assert load_delayPage.get_heading_text() == "Load Delays"
 
 # def test_load_delay_with_timer(browser, base_url):
 #     home = HomePage(browser)

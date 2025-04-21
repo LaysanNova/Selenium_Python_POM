@@ -25,6 +25,7 @@ def test_navigate_to_load_delay(home_page):
     assert load_delayPage.is_heading_visible()
     assert load_delayPage.get_heading_text() == "Load Delays"
 
+
 # def test_load_delay_with_timer(browser, base_url):
 #     home = HomePage(browser)
 #     page = LoadDelayPage(browser)

@@ -12,7 +12,7 @@ def pytest_addoption(parser):
         "--browser_name", action="store", default="chrome", help="Browser name: chrome or firefox"
     )
     parser.addoption(
-        "--env", action="store", default="dev", help="Environment name: dev/staging/prod"
+        "--env", action="store", default="def", help="Environment name: dev/staging/prod"
     )
 
 @pytest.fixture(scope="session", autouse=True)
